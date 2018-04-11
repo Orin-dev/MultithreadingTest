@@ -9,15 +9,16 @@ public class PopMinimalDigitThread extends Thread {
     private volatile List<Integer> digits;
 
     @Override
-    public void run(){
-        while (true){
-            synchronized (digits){
+    public void run() {
+        while (true) {
+            synchronized (digits) {
                 try {
-                    Integer min = Collections.min(digits);
-                    digits.remove(min);
-                    System.out.println("Minimal digit is: " + min);
-                }
-                catch (NoSuchElementException e){
+                    if (digits.size() != 0) {
+                        Integer min = Collections.min(digits);
+                        digits.remove(min);
+                        System.out.println("Minimal digit is " + min);
+                    }
+                } catch (NoSuchElementException e) {
                     e.printStackTrace();
                 }
 

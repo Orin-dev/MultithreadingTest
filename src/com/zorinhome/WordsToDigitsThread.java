@@ -4,25 +4,30 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class WordsToDigitsThread extends Thread {
 
-    private volatile List<Integer> digits;
+    private final List<Integer> digits;
+
+    private final DigitsFinder digitsFinder = new DigitsFinder();
+
+    private List<String> strings;
 
     public WordsToDigitsThread(List<Integer> list) {
         digits = list;
     }
 
     @Override
-    public void run(){
+    public void run() {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 //        Scanner scanner = new Scanner(System.in);
 
-        while (true){
+        while (true) {
             String line = null;
             try {
                 line = bufferedReader.readLine();
@@ -38,25 +43,18 @@ public class WordsToDigitsThread extends Thread {
                 e.printStackTrace();
             }
 
-            List<String> strings = Arrays.asList(line.split(" "));
+            strings = Arrays.asList(line.split(" "));
 
-            int digit;
-
-            if(strings.contains("thousand") || strings.contains("thousand"))
-
-
-
-            for (String s: strings
-                 ) {
-                switch (s){
-                    case "one":
-                }
+            digitsFinder.setStrings(strings);
+            try {
+                int digit = digitsFinder.calculate();
+                digits.add(digit);
+            } catch (DigitNotFoundException e) {
+                e.printStackTrace();
             }
 
         }
     }
 
 
-
-    }
 }

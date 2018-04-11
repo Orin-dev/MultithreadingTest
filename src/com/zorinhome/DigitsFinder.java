@@ -12,37 +12,48 @@ public class DigitsFinder {
         this.strings = strings;
     }
 
-    private void getThousands(List<String> strings) throws DigitNotFoundException {
+    public int calculate() throws DigitNotFoundException {
+        getThousands();
+        getHundreds();
+        getWhatElse();
+
+        int result = value;
+        value = 0;
+
+        return result;
+    }
+
+    private void getThousands() throws DigitNotFoundException {
         if (strings.contains("thousand") && strings.indexOf("thousand") == 1 && strings.get(0).equals("one"))
             value += 1000;
         else if (strings.contains("thousands") && strings.indexOf("thousands") == 1)
             value += 1000 * findDigit(strings.get(0));
         else
             return;
-        strings.remove(0);
-        strings.remove(0);
+        strings = strings.subList(2, strings.size());
     }
 
-    private void getHundreds(List<String> strings) throws DigitNotFoundException {
+    private void getHundreds() throws DigitNotFoundException {
         if (strings.contains("hundred") && (strings.indexOf("hundred") == 1) && strings.get(0).equals("one"))
             value += 100;
-        else if (strings.contains("hundreds") && (strings.indexOf("hundred") == 1))
-            value += 100 * findDigit(strings.get(0);
+        else if (strings.contains("hundreds") && (strings.indexOf("hundreds") == 1))
+            value += 100 * findDigit(strings.get(0));
         else
             return;
-        strings.remove(0);
-        strings.remove(0);
+        strings = strings.subList(2, strings.size());
     }
 
-    private void getWhatElse(List<String> strings) throws DigitNotFoundException {
+    private void getWhatElse() throws DigitNotFoundException {
         int val = findLessTwenty(strings.get(0));
 
-        if(val == 0) {
+        if (val == 0) {
             val = findTens(strings.get(0));
             if (val > 0 && strings.size() == 2)
                 value += findDigit(strings.get(1));
-        }
-        else return;
+        } else if (strings.size() < 2) {
+            value += val;
+            return;
+        } else throw new DigitNotFoundException();
         value += val;
     }
 
@@ -81,10 +92,14 @@ public class DigitsFinder {
                 return 40;
             case "fifty":
                 return 50;
-            case "eighty":
+            case "sixty":
                 return 60;
-            case "ninety":
+            case "seventy":
                 return 70;
+            case "eighty":
+                return 80;
+            case "ninety":
+                return 90;
             default:
                 return 0;
         }
@@ -133,5 +148,24 @@ public class DigitsFinder {
             default:
                 return 0;
         }
+    }
+
+    public DigitsFinder() {
+    }
+
+    public List<String> getStrings() {
+        return strings;
+    }
+
+    public void setStrings(List<String> strings) {
+        this.strings = strings;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }
