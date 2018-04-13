@@ -1,4 +1,4 @@
-package com.zorinhome;
+package com.orindev.bostongenetest.multithreadingtest;
 
 public class DigitNotFoundException extends Exception {
     DigitNotFoundException(){

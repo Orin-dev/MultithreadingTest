@@ -1,4 +1,4 @@
-package com.zorinhome;
+package com.orindev.bostongenetest.multithreadingtest;
 
 import java.util.List;
 
