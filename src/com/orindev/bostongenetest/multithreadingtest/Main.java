@@ -1,22 +1,20 @@
 package com.orindev.bostongenetest.multithreadingtest;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        List<Integer> list = Collections.synchronizedList(new ArrayList<>());
+        SortedSet<Integer> list = Collections.synchronizedSortedSet(new TreeSet<>());
 
         WordsToDigitsThread wordsToDigitsThread = new WordsToDigitsThread(list);
         wordsToDigitsThread.start();
 
 	    PopMinimalDigitThread popMinimalDigitThread = new PopMinimalDigitThread(list);
 	    popMinimalDigitThread.start();
-
-
 
     }
 }

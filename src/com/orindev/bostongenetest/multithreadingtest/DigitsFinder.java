@@ -44,7 +44,12 @@ public class DigitsFinder {
     }
 
     private void getWhatElse() throws DigitNotFoundException {
-        int val = findLessTwenty(strings.get(0));
+        int val = 0;
+        try {
+            val = findDigit(strings.get(0));
+        } catch (DigitNotFoundException e) {
+            val = findTeens(strings.get(0));
+        }
 
         if (val == 0) {
             val = findTens(strings.get(0));
@@ -59,6 +64,8 @@ public class DigitsFinder {
 
     private int findDigit(String s) throws DigitNotFoundException {
         switch (s) {
+            case "zero":
+                return 0;
             case "one":
                 return 1;
             case "two":
@@ -82,7 +89,7 @@ public class DigitsFinder {
         }
     }
 
-    private int findTens(String s) throws DigitNotFoundException {
+    private int findTens(String s) {
         switch (s) {
             case "twenty":
                 return 20;
@@ -105,26 +112,8 @@ public class DigitsFinder {
         }
     }
 
-    private int findLessTwenty(String s) throws DigitNotFoundException {
+    private int findTeens(String s) {
         switch (s) {
-            case "one":
-                return 1;
-            case "two":
-                return 2;
-            case "three":
-                return 3;
-            case "four":
-                return 4;
-            case "five":
-                return 5;
-            case "six":
-                return 6;
-            case "seven":
-                return 7;
-            case "eight":
-                return 8;
-            case "nine":
-                return 9;
             case "ten":
                 return 10;
             case "eleven":
@@ -161,11 +150,4 @@ public class DigitsFinder {
         this.strings = strings;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
 }

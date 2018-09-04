@@ -5,16 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.SortedSet;
 
 public class WordsToDigitsThread extends Thread {
 
-    private final List<Integer> digits;
+    private final SortedSet<Integer> digits;
 
     private final DigitsFinder digitsFinder = new DigitsFinder();
 
     private List<String> strings;
 
-    public WordsToDigitsThread(List<Integer> list) {
+    public WordsToDigitsThread(SortedSet<Integer> list) {
         digits = list;
     }
 

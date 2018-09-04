@@ -1,12 +1,11 @@
 package com.orindev.bostongenetest.multithreadingtest;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.SortedSet;
 
 public class PopMinimalDigitThread extends Thread {
 
-    private volatile List<Integer> digits;
+    private volatile SortedSet<Integer> digits;
 
     @Override
     public void run() {
@@ -14,7 +13,7 @@ public class PopMinimalDigitThread extends Thread {
             synchronized (digits) {
                 try {
                     if (digits.size() != 0) {
-                        Integer min = Collections.min(digits);
+                        Integer min = digits.first();
                         digits.remove(min);
                         System.out.println("Minimal digit is " + min);
                     }
@@ -32,15 +31,15 @@ public class PopMinimalDigitThread extends Thread {
 
     }
 
-    public PopMinimalDigitThread(List<Integer> digits) {
+    public PopMinimalDigitThread(SortedSet<Integer> digits) {
         this.digits = digits;
     }
 
-    public List<Integer> getDigits() {
+    public SortedSet<Integer> getDigits() {
         return digits;
     }
 
-    public void setDigits(List<Integer> digits) {
+    public void setDigits(SortedSet<Integer> digits) {
         this.digits = digits;
     }
 }
