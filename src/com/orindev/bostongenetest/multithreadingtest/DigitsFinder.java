@@ -142,10 +142,6 @@ public class DigitsFinder {
     public DigitsFinder() {
     }
 
-    public List<String> getStrings() {
-        return strings;
-    }
-
     public void setStrings(List<String> strings) {
         this.strings = strings;
     }

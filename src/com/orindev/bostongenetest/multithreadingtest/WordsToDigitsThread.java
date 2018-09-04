@@ -24,8 +24,6 @@ public class WordsToDigitsThread extends Thread {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-//        Scanner scanner = new Scanner(System.in);
-
         while (true) {
             String line = null;
             try {
@@ -34,7 +32,9 @@ public class WordsToDigitsThread extends Thread {
                 e.printStackTrace();
             }
 
-//            digits.add(scanner.nextInt());
+            if("STOP".equals(line)){
+                return;
+            }
 
             try {
                 Thread.sleep(100);
@@ -51,9 +51,6 @@ public class WordsToDigitsThread extends Thread {
             } catch (DigitNotFoundException e) {
                 e.printStackTrace();
             }
-
         }
     }
-
-
 }
